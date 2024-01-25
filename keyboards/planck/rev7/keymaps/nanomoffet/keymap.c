@@ -17,7 +17,7 @@
 #include QMK_KEYBOARD_H
 enum planck_layers { _QWERTY, _NUMPADFN, _SYMBOLSARROWS, _ADJUST, _COLEMAK, _DVORAK, _LOWER, _RAISE, _PLOVER};
 
-enum planck_keycodes { QWERTY = SAFE_RANGE, COLEMAK, DVORAK, PLOVER, BACKLIT, EXT_PLV };
+enum planck_keycodes { QWERTY = SAFE_RANGE, COLEMAK, DVORAK, PLOVER, BACKLIT, EXT_PLV, KVM1, KVM2, KVM3, KVM4 };
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
@@ -201,10 +201,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_NUMPADFN] = LAYOUT_planck_grid(
- _______,  KC_1,    KC_2,    KC_3,     KC_4,    KC_5,    KC_6,    _______, KC_7,    KC_8, KC_9,    _______, 
+ _______,  KC_1,    KC_2,    KC_3,     KC_4,    KC_5,    KC_6,    _______, KC_7,    KC_8, KC_9,    _______,
  _______,  KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F11,  KC_F12,  _______, KC_4,    KC_5, KC_6,    _______,
  _______,  KC_F1,   KC_F2,   KC_F3,    KC_F4,   KC_F5,   KC_F6,   _______, KC_1,    KC_2, KC_3,    _______,
- _______,  _______, _______, _______,  _______, _______, _______, MO(3),   _______, KC_0, _______, _______
+ KVM1,     KVM2,    KVM3,    KVM4,     _______, _______, _______, MO(3),   _______, KC_0, _______, _______
 ),
 
 
@@ -350,6 +350,42 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case KVM1:
+          if (record->event.pressed) {
+                tap_code(KC_LCTL);
+                tap_code(KC_LCTL);
+                tap_code(KC_1);
+                tap_code(KC_ENT);
+            }
+            return false;
+            break;
+        case KVM2:
+          if (record->event.pressed) {
+                tap_code(KC_LCTL);
+                tap_code(KC_LCTL);
+                tap_code(KC_2);
+                tap_code(KC_ENT);
+            }
+            return false;
+            break;
+        case KVM3:
+          if (record->event.pressed) {
+                tap_code(KC_LCTL);
+                tap_code(KC_LCTL);
+                tap_code(KC_3);
+                tap_code(KC_ENT);
+            }
+            return false;
+            break;
+        case KVM4:
+          if (record->event.pressed) {
+                tap_code(KC_LCTL);
+                tap_code(KC_LCTL);
+                tap_code(KC_4);
+                tap_code(KC_ENT);
+            }
+            return false;
+            break;
         case QWERTY:
             if (record->event.pressed) {
                 print("mode just switched to qwerty and this is a huge string\n");
